@@ -55,6 +55,10 @@ void framedTextAttr::frame(QTextCursor c) {
 }
 
 bool framedTextAttr::unframe(QTextCursor c) {
-    Q_UNUSED(c)
+    auto f = c.charFormat();
+    if (f.type() == type()) {
+        c.deleteChar();
+        return true;
+    }
     return false;
 }
